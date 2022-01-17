@@ -59,7 +59,10 @@ public class MainActivity extends AppCompatActivity {
         String server = edtServer.getText().toString();
         String username = edtUsername.getText().toString();
         String password = edtPassword.getText().toString();
-        int port = Integer.parseInt(String.valueOf(edtPort.getText()));
+        String port = edtPort.getText().toString();
+
+        Log.d("값이 잘 들어왔니? ", clientID + server + username + password + port);
+
 
         startConnect(new ConnectRequest(clientID, server, username, password, port));
     }
@@ -70,15 +73,18 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ConnectResponse> call, Response<ConnectResponse> response) {
                 ConnectResponse result = response.body();
 
-                Log.d("cMessage", result.getcMessage());
-
                 if(result.getcCode() == 1) {
-                    Intent intent = new Intent(MainActivity.this, PublishActivity.class);
+                    Intent intent = new Intent(MainActivity.this, SubscribeActivity.class);
+                    intent.putExtra("cCode", result.getcCode());
+                    Log.d("cMessage", result.getcMessage());
+
+                    startActivity(intent);
                 }
             }
 
             @Override
             public void onFailure(Call<ConnectResponse> call, Throwable t) {
+
 
             }
         });

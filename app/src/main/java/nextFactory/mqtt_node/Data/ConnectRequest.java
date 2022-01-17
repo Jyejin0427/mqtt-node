@@ -17,9 +17,9 @@ public class ConnectRequest {
     public String password;
 
     @SerializedName("port")
-    public int port;
+    public String port;
 
-    public ConnectRequest (String clientID, String server, String username, String password, int port) {
+    public ConnectRequest (String clientID, String server, String username, String password, String port) {
         this.clientID = clientID;
         this.server = server;
         this.username = username;
