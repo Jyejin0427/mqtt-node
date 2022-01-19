@@ -36,11 +36,30 @@ public class SubscribeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscribe);
 
+        txtTemp = findViewById(R.id.txtTemp);
+        txtHumi = findViewById(R.id.txtHumi);
+
         service= RetrofitClient.getClient().create(ServiceAPI.class);
 
         optTemp = findViewById(R.id.optTemp);
         optHumi = findViewById(R.id.optHumi);
         //optLight = findViewById(R.id.optLight);
+
+        optTemp.setOnClickListener(view->{
+            if(optTemp.isChecked()){
+                txtTemp.setVisibility(View.VISIBLE);
+            }else{
+                txtTemp.setVisibility(View.GONE);
+            }
+        });
+
+        optHumi.setOnClickListener(view->{
+            if(optHumi.isChecked()){
+                txtHumi.setVisibility(View.VISIBLE);
+            }else{
+                txtHumi.setVisibility(View.GONE);
+            }
+        });
 
         btnOptSearch = findViewById(R.id.btnOptSearch);
         btnOptResearch = findViewById(R.id.btnOptResearch);
@@ -103,8 +122,6 @@ public class SubscribeActivity extends AppCompatActivity {
 
 
 
-                txtTemp = findViewById(R.id.txtTemp);
-                txtHumi = findViewById(R.id.txtHumi);
 
                 txtTemp.setText(valTemp);
                 txtHumi.setText(valHumi);
