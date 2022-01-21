@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 ConnectResponse result = response.body();
 
                 if(result.getcCode() == 1) {
-                    Intent intent = new Intent(MainActivity.this, SubscribeActivity.class);
+                    Intent intent = new Intent(MainActivity.this, SubActivity.class);
                     intent.putExtra("cCode", result.getcCode());
                     Log.d("cMessage", result.getcMessage());
 
