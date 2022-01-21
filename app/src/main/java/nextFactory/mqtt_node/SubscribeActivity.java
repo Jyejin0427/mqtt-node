@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import nextFactory.mqtt_node.Data.PublishRequest;
@@ -22,10 +23,10 @@ import retrofit2.Response;
 
 public class SubscribeActivity extends AppCompatActivity {
 
-    private CheckBox optTemp, optHumi;
-    private Button btnOptSearch, btnOptResearch;
+    private RadioButton tempRadio, humiRadio;
+    private Button btnOptSearch;
     private FrameLayout layShowing;
-    private TextView txtTemp, txtHumi;
+    private TextView txtTemp, txtHumi, txtAny;
 
     private String topicTemp, topicHumi;
 
@@ -41,47 +42,48 @@ public class SubscribeActivity extends AppCompatActivity {
 
         service= RetrofitClient.getClient().create(ServiceAPI.class);
 
-        optTemp = findViewById(R.id.optTemp);
-        optHumi = findViewById(R.id.optHumi);
+        tempRadio = findViewById(R.id.tempRadio);
+        humiRadio = findViewById(R.id.humiRadio);
         //optLight = findViewById(R.id.optLight);
 
-        optTemp.setOnClickListener(view->{
-            if(optTemp.isChecked()){
+        tempRadio.setOnClickListener(view->{
+            if(tempRadio.isChecked()){
+                humiRadio.setChecked(false);
+                txtHumi.setVisibility(View.GONE);
+
                 txtTemp.setVisibility(View.VISIBLE);
-            }else{
-                txtTemp.setVisibility(View.GONE);
             }
         });
 
-        optHumi.setOnClickListener(view->{
-            if(optHumi.isChecked()){
+        humiRadio.setOnClickListener(view->{
+            if(humiRadio.isChecked()){
+                tempRadio.setChecked(false);
+                txtTemp.setVisibility(View.GONE);
+
                 txtHumi.setVisibility(View.VISIBLE);
-            }else{
-                txtHumi.setVisibility(View.GONE);
             }
         });
 
         btnOptSearch = findViewById(R.id.btnOptSearch);
-        btnOptResearch = findViewById(R.id.btnOptResearch);
 
         btnOptSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(optTemp.isChecked() && !optHumi.isChecked()) {
+                if(tempRadio.isChecked() && !humiRadio.isChecked()) {
                     //온도만 보고싶다!
                     topicTemp = "Arduino/temp";
                     topicHumi = null;
 
                     startSubscribe(new SubscribeRequest(topicTemp, topicHumi));
 
-                } else if(!optTemp.isChecked() && optHumi.isChecked()) {
+                } else if(!tempRadio.isChecked() && humiRadio.isChecked()) {
                     //습도만 보고싶다!
                     topicTemp = null;
                     topicHumi = "Arduino/humi";
 
                     startSubscribe(new SubscribeRequest(topicTemp, topicHumi));
 
-                } else if(optTemp.isChecked() && optHumi.isChecked()) {
+                } else if(tempRadio.isChecked() && humiRadio.isChecked()) {
                     //온습도 둘 다 보고싶다!
                     topicTemp = "Arduino/temp";
                     topicHumi = "Arduino/humi";
@@ -93,20 +95,6 @@ public class SubscribeActivity extends AppCompatActivity {
 
             }
         });
-
-        btnOptResearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                research();
-            }
-        });
-    }
-
-    private void research() {
-        topicTemp = null;
-        topicHumi = null;
-
-        startSubscribe(new SubscribeRequest(topicTemp, topicHumi));
     }
 
     private void startSubscribe(SubscribeRequest data) {
@@ -115,22 +103,16 @@ public class SubscribeActivity extends AppCompatActivity {
             public void onResponse(Call<SubscribeResponse> call, Response<SubscribeResponse> response) {
                 SubscribeResponse result = response.body();
 
+                Log.d("result? ", result.getValAny());
+                String valTemp = result.getValAny();
 
-                //Log.d("result temp? ", result.getValTemp());
-                String valTemp = result.getValTemp();
-                String valHumi = result.getValHumi();
-
-
-
-
-                txtTemp.setText(valTemp);
-                txtHumi.setText(valHumi);
-
+                txtAny = findViewById(R.id.txtAny);
+                txtAny.setText(valTemp);
             }
 
             @Override
             public void onFailure(Call<SubscribeResponse> call, Throwable t) {
-
+                Log.d("result", t.toString());
             }
         });
     }

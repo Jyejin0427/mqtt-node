@@ -17,18 +17,23 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
-            <CheckBox
-                android:id="@+id/optTemp"
+
+            <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="온도"
-                android:textSize="20dp"/>
-            <CheckBox
-                android:id="@+id/optHumi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="습도"
-                android:textSize="20dp"/>
+                android:layout_height="match_parent" >
+
+                <RadioButton
+                    android:id="@+id/tempRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="온도" />
+
+                <RadioButton
+                    android:id="@+id/humiRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="습도" />
+            </RadioGroup>
 
         </LinearLayout>
         <LinearLayout
@@ -52,38 +57,41 @@
             android:text="검색"
             android:textSize="20dp"
             android:textStyle="bold" />
-        <Button
-            android:id="@+id/btnOptResearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:backgroundTint="@color/black"
-            android:text="재검색"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="20dp"/>
 
     </LinearLayout>
 
 
-
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/layShowing"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3">
+        android:layout_weight="3"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/txtTemp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:text="아직 온도 값 안들어옴"
+            android:textColor="#000000"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/txtHumi"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:text="아직 습도 값 안들어옴"
+            android:textColor="#000000"
+            android:visibility="gone" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/txtAny"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="값 아직 안들어옴"
+            android:textColor="#000000" />
+
+    </LinearLayout>
 
 
 
