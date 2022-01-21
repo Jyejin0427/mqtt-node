@@ -4,11 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import nextFactory.mqtt_node.Data.ConnectResponse;
 import nextFactory.mqtt_node.Data.PublishRequest;
 import nextFactory.mqtt_node.Data.PublishResponse;
 import nextFactory.mqtt_node.Network.RetrofitClient;
@@ -19,7 +17,7 @@ import retrofit2.Response;
 
 public class PublishActivity extends AppCompatActivity {
 
-    private Button btnPublish;
+    private Button onBtn, offBtn;
 
     private ServiceAPI service;
 
@@ -28,13 +26,21 @@ public class PublishActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
 
-        btnPublish = findViewById(R.id.btnPublish);
+        onBtn = findViewById(R.id.onBtn);
+        offBtn = findViewById(R.id.offBtn);
 
         service= RetrofitClient.getClient().create(ServiceAPI.class);
 
         Intent intent = getIntent();
 
-        btnPublish.setOnClickListener(new View.OnClickListener() {
+        onBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptPublish();
+            }
+        });
+
+        offBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptPublish();

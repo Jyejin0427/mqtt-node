@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".PublishActivity">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="연결은 성공!!!">
-
-    </TextView>
 
     <Button
-        android:id="@+id/btnPublish"
+        android:id="@+id/onBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PUBLISH" />
+        android:text="조명 ON" />
+
+    <Button
+        android:id="@+id/offBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="조명 OFF" />
 
 </LinearLayout>
