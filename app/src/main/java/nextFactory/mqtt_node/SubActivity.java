@@ -23,7 +23,7 @@ public class SubActivity extends AppCompatActivity {
             startActivity(pub);
         });
         toSubscribe.setOnClickListener(view->{
-            Intent sub = new Intent(SubActivity.this, SubscribeActivity.class);
+            Intent sub = new Intent(SubActivity.this, Subscribe2Activity.class);
             startActivity(sub);
         });
     }
