@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mqttnode">
         <activity
+            android:name=".Subscribe2Activity"
+            android:exported="false" />
+        <activity
             android:name=".SubActivity"
             android:exported="false" />
         <activity android:name=".SubscribeActivity" />

@@ -4,6 +4,7 @@ import nextFactory.mqtt_node.Data.ConnectRequest;
 import nextFactory.mqtt_node.Data.ConnectResponse;
 import nextFactory.mqtt_node.Data.PublishRequest;
 import nextFactory.mqtt_node.Data.PublishResponse;
+import nextFactory.mqtt_node.Data.Subscribe2Request;
 import nextFactory.mqtt_node.Data.SubscribeRequest;
 import nextFactory.mqtt_node.Data.SubscribeResponse;
 import retrofit2.Call;
@@ -22,4 +23,7 @@ public interface ServiceAPI {
 
     @POST("/app/subscribe")
     Call<SubscribeResponse> subscribe(@Body SubscribeRequest data);
+
+    @POST("/app/subscribe2")
+    Call<SubscribeResponse> subscribe2(@Body Subscribe2Request data);
 }
